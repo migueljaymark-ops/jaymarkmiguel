@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>My Portfolio</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             scroll-behavior: smooth;
+         }
+         :root {
+             --primary: #6366f1;
+             --secondary: #ec4899;
+             --dark: #1f2937;
+             --light: #f9fafb;
+             --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+         }
+         body {
+             background: var(--light);
+             color: var(--dark);
+             line-height: 1.6;
+         }
+         /* Navigation */
+         nav {
+             position: fixed;
+             top: 0;
+             width: 100%;
+             background: rgba(255,255,255,0.95);
+             backdrop-filter: blur(10px);
+             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+             z-index: 1000;
+             padding: 1rem 5%;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+         .logo {
+             font-size: 1.5rem;
+             font-weight: 700;
+             background: var(--gradient);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+         }
+         .nav-links a {
+             margin-left: 2rem;
+             text-decoration: none;
+             color: var(--dark);
+             font-weight: 500;
+             transition: color 0.3s;
+         }
+         .nav-links a:hover {
+             color: var(--primary);
+         }
+         /* Hero Section */
+         .hero {
+             min-height: 100vh;
+             display: flex;
+             align-items: center;
+             padding: 8rem 5% 4rem;
+             background: linear-gradient(135deg, #6366f110, #ec489910);
+         }
+         .hero-content {
+             flex: 1;
+         }
+         .hero h1 {
+             font-size: 3.5rem;
+             line-height: 1.2;
+             margin-bottom: 1.5rem;
+         }
+         .hero h1 span {
+             background: var(--gradient);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+         }
+         .hero p {
+             font-size: 1.2rem;
+             color: #6b7280;
+             margin-bottom: 2rem;
+             max-width: 500px;
+         }
+         .btn {
+             padding: 0.9rem 2rem;
+             border-radius: 50px;
+             border: none;
+             font-size: 1rem;
+             font-weight: 600;
+             cursor: pointer;
+             transition: transform 0.3s, box-shadow 0.3s;
+             text-decoration: none;
+             display: inline-block;
+         }
+         .btn-primary {
+             background: var(--gradient);
+             color: white;
+             margin-right: 1rem;
+         }
+         .btn-secondary {
+             background: white;
+             color: var(--primary);
+             border: 2px solid var(--primary);
+         }
+         .btn:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+         }
+         .hero-img {
+             flex: 1;
+             display: flex;
+             justify-content: center;
+         }
+         .hero-img img {
+             width: 380px;
+             height: 380px;
+             border-radius: 50%;
+             object-fit: cover;
+             border: 8px solid white;
+             box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
+         }
+         /* Sections */
+         section {
+             padding: 6rem 5%;
+         }
+         .section-title {
+             text-align: center;
+             font-size: 2.5rem;
+             margin-bottom: 4rem;
+             position: relative;
+         }
+         .section-title::after {
+             content: '';
+             position: absolute;
+             bottom: -10px;
+             left: 50%;
+             transform: translateX(-50%);
+             width: 60px;
+             height: 4px;
+             background: var(--gradient);
+             border-radius: 2px;
+         }
+         /* About */
+         .about-content {
+             max-width: 800px;
+             margin: 0 auto;
+             text-align: center;
+             font-size: 1.1rem;
+             color: #4b5563;
+             line-height: 1.8;
+         }
+         /* Skills */
+         .skills {
+             background: white;
+         }
+         .skills-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+             gap: 2rem;
+             max-width: 1000px;
+             margin: 0 auto;
+         }
+         .skill-card {
+             text-align: center;
+             padding: 2rem;
+             border-radius: 16px;
+             background: var(--light);
+             transition: all 0.3s;
+         }
+         .skill-card:hover {
+             transform: translateY(-8px);
+             background: linear-gradient(135deg, #6366f115, #ec489915);
+         }
+         .skill-card h3 {
+             margin-top: 1rem;
+             color: var(--dark);
+         }
+         /* Projects */
+         .projects-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+             gap: 2.5rem;
+             max-width: 1200px;
+             margin: 0 auto;
+         }
+         .project-card {
+             background: white;
+             border-radius: 20px;
+             overflow: hidden;
+             box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+             transition: transform 0.3s, box-shadow 0.3s;
+         }
+         .project-card:hover {
+             transform: translateY(-10px);
+             box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
+         }
+         .project-card img {
+             width: 100%;
+             height: 200px;
+             object-fit: cover;
+         }
+         .project-info {
+             padding: 1.5rem;
+         }
+         .project-info h3 {
+             font-size: 1.3rem;
+             margin-bottom: 0.8rem;
+         }
+         .project-info p {
+             color: #6b7280;
+             margin-bottom: 1rem;
+         }
+         .project-link {
+             color: var(--primary);
+             text-decoration: none;
+             font-weight: 600;
+         }
+         /* Contact */
+         .contact {
+             background: var(--dark);
+             color: white;
+             text-align: center;
+         }
+         .contact p {
+             max-width: 500px;
+             margin: 0 auto 2rem;
+             color: #d1d5db;
+         }
+         .contact-links a {
+             color: white;
+             margin: 0 1rem;
+             font-size: 1.1rem;
+             text-decoration: none;
+             transition: color 0.3s;
+         }
+         .contact-links a:hover {
+             color: var(--secondary);
+         }
+         /* Footer */
+         footer {
+             text-align: center;
+             padding: 2rem;
+             background: #111827;
+             color: #9ca3af;
+             font-size: 0.9rem;
+         }
+         /* Mobile Responsive */
+         @media (max-width: 768px) {
+             .hero {
+                 flex-direction: column-reverse;
+                 text-align: center;
+                 gap: 3rem;
+             }
+             .hero h1 {
+                 font-size: 2.2rem;
+             }
+             .hero-img img {
+                 width: 280px;
+                 height: 280px;
+             }
+             .nav-links {
+                 display: none;
+             }
+         }
+     </style>
+ </head>
+ <body>
+     <!-- Navigation -->
+     <nav>
+         <div class="logo">MyPortfolio</div>
+         <div class="nav-links">
+             <a href="#home">Home</a>
+             <a href="#about">About</a>
+             <a href="#skills">Skills</a>
+             <a href="#projects">Projects</a>
+             <a href="#contact">Contact</a>
+         </div>
+     </nav>
+     <!-- Hero Section -->
+     <section class="hero" id="home">
+         <div class="hero-content">
+             <h1>Hello, I'm <span>Jaymark Miguel</span><br>A Creative Developer</h1>
+             <p>I design and build beautiful, functional websites and applications that users love.</p>
+             <a href="#contact" class="btn btn-primary">Get In Touch</a>
+             <a href="#projects" class="btn btn-secondary">View Work</a>
+         </div>
+         <div class="hero-img">
+             <img src="https://.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Profile Photo">
+         </div>
+     </section>
+     <!-- About Section -->
+     <section id="about">
+         <h2 class="section-title">About Me</h2>
+         <div class="about-content">
+             <p>Hi there! I'm a passionate developer who loves creating beautiful digital experiences. I enjoy turning complex problems into simple, beautiful and intuitive designs. When I'm not coding, you'll find me exploring new technologies or working on creative projects. My goal is to build products that not only look great but also work perfectly.</p>
+         </div>
+     </section>
+     <!-- Skills Section -->
+     <section class="skills" id="skills">
+         <h2 class="section-title">My Skills</h2>
+         <div class="skills-grid">
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">🌐</div>
+                 <h3>HTML5</h3>
+             </div>
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">🎨</div>
+                 <h3>CSS3</h3>
+             </div>
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">⚡</div>
+                 <h3>JavaScript</h3>
+             </div>
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">📱</div>
+                 <h3>Responsive</h3>
+             </div>
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">🚀</div>
+                 <h3>Web Design</h3>
+             </div>
+             <div class="skill-card">
+                 <div style="font-size: 2.5rem; color: var(--primary);">💡</div>
+                 <h3>UI/UX</h3>
+             </div>
+         </div>
+     </section>
+     <!-- Projects Section -->
+     <section id="projects">
+         <h2 class="section-title">My Projects</h2>
+         <div class="projects-grid">
+             <div class="project-card">
+                 <img src="https://images.unsplash.com/photo-1467232004584-aec4d0bd9a47?w=600&h=400&fit=crop" alt="Project 1">
+                 <div class="project-info">
+                     <h3>Personal Blog</h3>
+                     <p>A clean, modern blog design built with HTML, CSS, and JavaScript.</p>
+                     <a href="#" class="project-link">View Project →</a>
+                 </div>
+             </div>
+             <div class="project-card">
+                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Project 2">
+                 <div class="project-info">
+                     <h3>Business Website</h3>
+                     <p>Professional business landing page with responsive layout and smooth animations.</p>
+                     <a href="#" class="project-link">View Project →</a>
+                 </div>
+             </div>
+             <div class="project-card">
+                 <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop" alt="Project 3">
+                 <div class="project-info">
+                     <h3>Portfolio Website</h3>
+                     <p>Creative portfolio template with modern design and elegant transitions.</p>
+                     <a href="#" class="project-link">View Project →</a>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- Contact Section -->
+     <section class="contact" id="contact">
+         <h2 class="section-title">Get In Touch</h2>
+         <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+         <p>📧 migueljaymark@gmail.com | 📍 Philippines</p>
+         <div class="contact-links">
+             <a href="#">GitHub</a>
+             <a href="#">LinkedIn</a>
+             <a href="#">Twitter</a>
+             <a href="#">Instagram</a>
+         </div>
+     </section>
+     <!-- Footer -->
+     <footer>
+         <p>© 2026 Your Name. All rights reserved. Made with ❤️</p>
+     </footer>
+ </body>
+ </html>
